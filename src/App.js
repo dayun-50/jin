@@ -9,6 +9,16 @@ export const UserContext = React.createContext();
 function App() {
   const [users, setUsers] = useState([]); // 프론트 저장소
 
+  return (
+    <UserContext.Provider value={{ users, setUsers }}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </Router>
+    </UserContext.Provider>
+  );
   
 }
 
