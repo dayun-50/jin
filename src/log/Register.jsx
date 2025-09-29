@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 import styles from "./Register.module.css"; // log 폴더 기준
+import axios from "axios";
+
 
 export default function Register() {
   const { users, setUsers } = useContext(UserContext);
@@ -19,8 +21,8 @@ export default function Register() {
     setMsg("");
     setLoading(true);
 
-    import('axios').then(({ default: axios }) => {
-      axios.post("http://10.5.5.9:8080/api/auth/register", user)
+
+      axios.post("http://10.5.5.9/users", user)
         .then(resp => {
           if (resp.data.success) {
             alert("회원가입 완료!");
@@ -35,10 +37,9 @@ export default function Register() {
           setMsg("서버 오류");
         })
         .finally(() => setLoading(false));
-    });
-  };
+    };
 
-  return (
+    return (
     <div className={styles.container}>
   <div className={styles["register-card"]}>
     <h2>회원가입</h2>
@@ -58,4 +59,7 @@ export default function Register() {
 </div>
 
   );
-}
+  };
+
+  
+
